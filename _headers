@@ -1,0 +1,16 @@
+/*
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: interest-cohort=()
+
+# Long-cache the immutable PNG/CSS — they're versioned by content via filename.
+/assets/*
+  Cache-Control: public, max-age=604800, immutable
+
+# Appcast and DMGs are short-cached so updates roll out fast.
+/appcast.xml
+  Cache-Control: public, max-age=300
+/downloads/*
+  Cache-Control: public, max-age=300

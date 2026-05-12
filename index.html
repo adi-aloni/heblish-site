@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heblish — Hebrew/English layout autocorrect for macOS</title>
+<meta name="description" content="Stop retyping when you started in the wrong language. Heblish quietly catches the moment you mistyped Hebrew on English (or vice versa) and fixes it. macOS, local-only, no network calls.">
+<meta name="theme-color" content="#1f2a44">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Heblish — Hebrew/English layout autocorrect for macOS">
+<meta property="og:description" content="Stop retyping when you started in the wrong language. macOS, local-only, no network calls.">
+<meta property="og:image" content="https://heblish.adialoni.com/assets/og-image.png">
+<meta property="og:url" content="https://heblish.adialoni.com/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/favicon-256.png">
+<link rel="apple-touch-icon" href="/assets/favicon-256.png">
+
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <img src="/assets/icon-64.png" alt="" width="32" height="32">
+    <span>Heblish</span>
+  </a>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#faq">FAQ</a>
+    <a href="#changelog">Changelog</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <img class="hero-icon" src="/assets/icon-512.png" alt="Heblish app icon" width="160" height="160">
+  <h1>Stop retyping when you started in the wrong language.</h1>
+  <p class="lede">
+    Heblish quietly catches the moment you typed a Hebrew word on the English
+    keyboard, or vice versa, and fixes it in place — switching the input
+    source so your next word lands in the right layout.
+  </p>
+  <div class="cta">
+    <a class="btn primary" href="/downloads/Heblish-latest.dmg">Download for macOS</a>
+    <span class="meta">Requires macOS 13 or later · Apple Silicon &amp; Intel · ~2&nbsp;MB</span>
+  </div>
+
+  <div class="demos" aria-label="Examples of Heblish auto-fixing layout mistakes">
+    <div class="demo">
+      <div class="demo-typed">akuo<span class="cursor"> </span></div>
+      <div class="demo-arrow" aria-hidden="true">→</div>
+      <div class="demo-fixed">שלום</div>
+    </div>
+    <div class="demo">
+      <div class="demo-typed">tr.<span class="cursor"> </span></div>
+      <div class="demo-arrow" aria-hidden="true">→</div>
+      <div class="demo-fixed">ארץ</div>
+    </div>
+    <div class="demo">
+      <div class="demo-typed">I,צ<span class="cursor"> </span></div>
+      <div class="demo-arrow" aria-hidden="true">→</div>
+      <div class="demo-fixed">I'm</div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="section">
+  <h2>How it works</h2>
+  <div class="cols">
+    <div>
+      <h3>1. It watches words, not keystrokes</h3>
+      <p>
+        Each time you finish a word — by hitting space, return, or
+        punctuation — Heblish asks one question: <em>does this word make
+        sense in the language the keyboard is set to?</em>
+      </p>
+    </div>
+    <div>
+      <h3>2. It tries the other layout</h3>
+      <p>
+        If the answer is no, Heblish maps the word to the other layout's
+        keys and checks: <em>is that a real word?</em> Hebrew is checked
+        against macOS's built-in spell checker; English uses the system
+        word list and the spell checker together.
+      </p>
+    </div>
+    <div>
+      <h3>3. It rewrites and switches</h3>
+      <p>
+        If only the other-layout word is real, Heblish erases what you
+        typed, switches the input source, and types the correct word.
+        Your next word lands in the right language. If it ever guesses
+        wrong, ⌥⇧X within two seconds undoes the fix and adds the word
+        to an ignore list so it never auto-fixes that word again.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Hotkeys</h2>
+  <table class="hotkeys">
+    <tbody>
+      <tr><th><kbd>⌥</kbd><kbd>⇧</kbd><kbd>Z</kbd></th><td>Manually fix the current word before you've hit space.</td></tr>
+      <tr><th><kbd>⌥</kbd><kbd>⇧</kbd><kbd>X</kbd></th><td>Undo the last auto-fix (within 2 seconds and only if you haven't typed anything else). Adds the word to the ignore list.</td></tr>
+      <tr><th><kbd>⌥</kbd><kbd>⇧</kbd><kbd>I</kbd></th><td>Take whatever text is highlighted in the foreground app and add each word to the ignore list.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="privacy" class="section privacy">
+  <h2>Privacy</h2>
+  <p class="lede">
+    Heblish does not make a single network call. Ever. You can verify
+    it yourself.
+  </p>
+  <ul class="checklist">
+    <li>The compiled binary links only Apple frameworks (AppKit, Carbon, ApplicationServices). No <code>URLSession</code>, no <code>Network.framework</code>, nothing.</li>
+    <li>The dictionaries it uses are <code>/usr/share/dict/words</code> and macOS's bundled <code>NSSpellChecker</code> — both fully local.</li>
+    <li>Your buffered word lives in RAM and is wiped whenever you finish a word, switch apps, lock the screen, or quit.</li>
+    <li>Heblish never buffers when a password field, sudo prompt, or Touch ID dialog is active. macOS's <code>IsSecureEventInputEnabled()</code> short-circuits it.</li>
+    <li>The only file Heblish writes is your ignore list, at <code>~/Library/Application Support/Heblish/ignore_list.txt</code>, with mode <code>0600</code>. You can read or delete it any time.</li>
+    <li>You can put Heblish behind any firewall (Little Snitch, LuLu, macOS's built-in) and block all outgoing traffic. It will work identically.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>What it handles well</h2>
+  <ul class="checklist">
+    <li><strong>Hebrew typed on English:</strong> <code>akuo</code> → <code>שלום</code>, <code>vch,</code> → <code>הבית</code></li>
+    <li><strong>English typed on Hebrew:</strong> <code>יקךךם</code> → <code>hello</code></li>
+    <li><strong>Words starting with ת:</strong> <code>,usv</code> → <code>תודה</code></li>
+    <li><strong>Words ending with ץ / ף:</strong> <code>tr.</code> → <code>ארץ</code>, <code>xu;</code> → <code>סוף</code></li>
+    <li><strong>Mixed scripts</strong> when shift produces a Latin literal on Hebrew layout: <code>I,צ</code> → <code>I'm</code>, <code>Hקךךם</code> → <code>Hello</code></li>
+    <li><strong>Cascading mistakes:</strong> if you type several words in the wrong layout, Heblish fixes each one independently.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>What it deliberately leaves alone</h2>
+  <ul class="checklist">
+    <li>Real English contractions like <code>I'm</code>, <code>don't</code>, <code>can't</code>.</li>
+    <li>Proper nouns like <code>Adi</code>, <code>Tom</code>, <code>Friday</code>.</li>
+    <li>Acronyms like <code>PT</code>, <code>USA</code>, <code>OK</code> — even when followed by punctuation.</li>
+    <li>Two-letter words (<code>I</code>, <code>am</code>, <code>is</code>, <code>to</code>) where the layout ambiguity is too strong to call.</li>
+    <li>Any word you've put on the ignore list, either by undoing a fix or by adding manually.</li>
+    <li>Anything typed into a password field.</li>
+  </ul>
+</section>
+
+<section id="faq" class="section">
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>Why does Heblish need Accessibility permission?</summary>
+    <p>
+      Accessibility is the macOS permission that lets an app observe keystrokes
+      system-wide. That's what Heblish does — it reads each key you press to
+      decide whether a word might be in the wrong layout. The same permission
+      is what Karabiner, Alfred, Rectangle, BetterTouchTool, and similar apps
+      use. The observation happens entirely locally; nothing leaves your Mac.
+    </p>
+  </details>
+
+  <details>
+    <summary>Why isn't Heblish on the Mac App Store?</summary>
+    <p>
+      Mac App Store apps must run in App Sandbox, which doesn't allow the
+      kind of system-wide keystroke observation Heblish needs. Apps like
+      Karabiner-Elements, Hammerspoon, BetterTouchTool, and Alfred all
+      distribute directly for the same reason. Heblish is signed and
+      notarized by Apple, so macOS opens it without the "unidentified
+      developer" warning — it just isn't in the App Store's catalog.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does Heblish work with non-standard Hebrew layouts?</summary>
+    <p>
+      Heblish currently assumes the standard Israeli "Hebrew" input source
+      (not "Hebrew – QWERTY" or "Hebrew – PC"). If you use a different
+      layout, the key-to-letter mapping will be off. Let me know — adding
+      additional layouts is straightforward.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I edit the ignore list directly?</summary>
+    <p>
+      Yes. Open the file at <code>~/Library/Application
+      Support/Heblish/ignore_list.txt</code> in any text editor (one word per
+      line), save, and click <strong>Reload</strong> in the Heblish menu.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does Heblish auto-update?</summary>
+    <p>
+      Yes — it uses Sparkle, the open-source auto-update framework. Updates
+      are signed with EdDSA and downloaded from this domain. You'll see a
+      gentle prompt when a new version is available; you can install it,
+      skip it, or disable update checks entirely in the menu.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I trust an unfamiliar app to read my keystrokes?</summary>
+    <p>
+      That is the right question to ask of any app that requests
+      Accessibility permission. The short answer for Heblish: it's signed
+      and notarized by Apple, makes no network calls (verifiable with
+      <code>nm</code> on the binary), and the source code can be reviewed.
+      If you want a hard guarantee, block it at the firewall — it doesn't
+      need the network for anything.
+    </p>
+  </details>
+
+  <details>
+    <summary>Is Heblish free?</summary>
+    <p>
+      Yes. If you find it useful and want to support development, that's
+      always appreciated — but there's no payment required.
+    </p>
+  </details>
+</section>
+
+<section id="changelog" class="section">
+  <h2>Changelog</h2>
+  <article class="release">
+    <h3>0.1 <span class="release-date">unreleased</span></h3>
+    <ul>
+      <li>Initial release.</li>
+      <li>Auto-correct of layout-mistyped Hebrew and English words on word-boundary.</li>
+      <li>Manual fix, undo, and ignore-selection hotkeys (⌥⇧Z / ⌥⇧X / ⌥⇧I).</li>
+      <li>Persistent ignore list with full edit and clear controls.</li>
+      <li>Mixed-script handling for shifted Latin literals on Hebrew layout.</li>
+      <li>Proper-noun and acronym suppression.</li>
+      <li>Asymmetric recent-context heuristics tuned against a 50-sentence corpus.</li>
+      <li>Auto-update via Sparkle, signed with EdDSA.</li>
+    </ul>
+  </article>
+</section>
+
+</main>
+
+<footer>
+  <div>
+    <a href="/">Heblish</a> · made by <a href="https://adialoni.com">Adi Aloni</a> · <a href="mailto:adi@adialoni.com">adi@adialoni.com</a>
+  </div>
+</footer>
+
+</body>
+</html>

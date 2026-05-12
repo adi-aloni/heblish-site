@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+node_modules/
+.netlify/
+.vercel/
+# Don't track downloads in git — they're large binaries. Use Cloudflare
+# Pages' direct upload, GitHub Releases, or LFS once we ship.
+downloads/*.dmg
+downloads/*.zip
