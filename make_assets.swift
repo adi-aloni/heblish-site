@@ -34,9 +34,11 @@ func renderIcon(size: Int) -> Data? {
     let rect = NSRect(x: inset, y: inset, width: s - 2*inset, height: s - 2*inset)
     let radius = (s - 2*inset) * 0.225
 
+    // Emerald gradient — matches the Adi Aloni brand palette.
+    // Darker base = brand "emerald hover" #1A7856; highlight = a brighter emerald.
     let gradient = NSGradient(colors: [
-        NSColor(calibratedRed: 0.12, green: 0.16, blue: 0.26, alpha: 1.0),
-        NSColor(calibratedRed: 0.22, green: 0.30, blue: 0.46, alpha: 1.0),
+        NSColor(calibratedRed: 0.085, green: 0.420, blue: 0.305, alpha: 1.0), // #166B4E
+        NSColor(calibratedRed: 0.180, green: 0.655, blue: 0.490, alpha: 1.0), // #2EA77D
     ])!
     let path = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
     NSGraphicsContext.saveGraphicsState()
@@ -81,15 +83,15 @@ func renderOG(width: Int, height: Int) -> Data? {
     defer { NSGraphicsContext.restoreGraphicsState() }
     NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
 
-    // Background gradient matching the site dark theme
+    // Cool-white brand background with a subtle mint tint at the bottom.
     let bgRect = NSRect(x: 0, y: 0, width: width, height: height)
     let bgGradient = NSGradient(colors: [
-        NSColor(calibratedRed: 0.055, green: 0.078, blue: 0.133, alpha: 1.0),
-        NSColor(calibratedRed: 0.122, green: 0.165, blue: 0.267, alpha: 1.0),
+        NSColor(calibratedRed: 0.953, green: 0.965, blue: 0.953, alpha: 1.0), // #F3F6F3 cool-white
+        NSColor(calibratedRed: 0.902, green: 0.937, blue: 0.910, alpha: 1.0), // #E6EFE8 panel
     ])!
     bgGradient.draw(in: bgRect, angle: 120)
 
-    // App icon tile, left
+    // App icon tile, left — emerald gradient, matches icons
     let tileSize: CGFloat = 280
     let tilePadding: CGFloat = 80
     let tileX = tilePadding
@@ -101,8 +103,8 @@ func renderOG(width: Int, height: Int) -> Data? {
     NSGraphicsContext.saveGraphicsState()
     tilePath.addClip()
     let tileGradient = NSGradient(colors: [
-        NSColor(calibratedRed: 0.12, green: 0.16, blue: 0.26, alpha: 1.0),
-        NSColor(calibratedRed: 0.32, green: 0.42, blue: 0.62, alpha: 1.0),
+        NSColor(calibratedRed: 0.085, green: 0.420, blue: 0.305, alpha: 1.0), // #166B4E
+        NSColor(calibratedRed: 0.180, green: 0.655, blue: 0.490, alpha: 1.0), // #2EA77D
     ])!
     tileGradient.draw(in: tileRect, angle: 90)
     NSGraphicsContext.restoreGraphicsState()
@@ -122,19 +124,19 @@ func renderOG(width: Int, height: Int) -> Data? {
         x: tileX, y: tileY + (tileSize - tileTSize.height)/2 - tileSize * 0.025,
         width: tileSize, height: tileTSize.height))
 
-    // Right column: name + tagline
+    // Right column: name + tagline — ink/sage on cool-white background.
     let textX = tileX + tileSize + 60
     let textRight = CGFloat(width) - tilePadding
     let textWidth = textRight - textX
 
     let title = NSAttributedString(string: "Heblish", attributes: [
         .font: NSFont.systemFont(ofSize: 96, weight: .bold),
-        .foregroundColor: NSColor.white,
+        .foregroundColor: NSColor(calibratedRed: 0.075, green: 0.090, blue: 0.102, alpha: 1.0), // #13171A ink
         .kern: -1.5,
     ])
     let tagline = NSAttributedString(string: "Hebrew / English keyboard\nautocorrect for macOS", attributes: [
         .font: NSFont.systemFont(ofSize: 36, weight: .regular),
-        .foregroundColor: NSColor(white: 0.85, alpha: 1.0),
+        .foregroundColor: NSColor(calibratedRed: 0.392, green: 0.439, blue: 0.416, alpha: 1.0), // #64706A sage
     ])
     let titleSize = title.boundingRect(
         with: NSSize(width: textWidth, height: 200),
