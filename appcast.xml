@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Sparkle appcast for Heblish.
-
-  Each <item> describes one shipped release. The Heblish app polls this file
-  periodically and offers the user any release newer than what they have
-  installed. Updates are verified by the EdDSA signature in the
-  `sparkle:edSignature` attribute, using the public key embedded in the app's
-  Info.plist under `SUPublicEDKey`.
-
-  No releases yet — this file is published as a placeholder so the live URL
-  exists from day one. The first real release will replace the empty
-  <channel> body with an <item> block matching the Sparkle 2 schema.
--->
 <rss version="2.0"
      xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
      xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -20,6 +7,16 @@
         <link>https://heblish.adialoni.com/appcast.xml</link>
         <description>Stable releases of Heblish for macOS.</description>
         <language>en</language>
-        <!-- First release will appear here once 0.1 is signed and notarized. -->
+        <item>
+            <title>Heblish 1.0</title>
+            <pubDate>Wed, 24 Jun 2026 14:47:33 -0700</pubDate>
+            <sparkle:version>100</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/adi-aloni/heblish-site/releases/download/v1.0/Heblish.dmg"
+                sparkle:edSignature="kFmuSbeSaUpKcblZtxZuR1FnFQ1t+DyXfwuXkte66fGPbvF+oJvMubq0+huoPyKNAW8iAwNzdkFG8BbahdVIAA==" length="1588580"
+                type="application/octet-stream" />
+        </item>
     </channel>
 </rss>
