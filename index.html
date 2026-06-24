@@ -51,7 +51,7 @@
     source so your next word lands in the right layout.
   </p>
   <div class="cta">
-    <a class="btn primary" href="/downloads/Heblish-latest.dmg">Download for macOS</a>
+    <a class="btn primary" href="https://github.com/adi-aloni/heblish-site/releases/latest/download/Heblish.dmg">Download for macOS</a>
     <span class="meta">Requires macOS 13 or later · Apple Silicon &amp; Intel · ~2&nbsp;MB</span>
   </div>
 
@@ -121,16 +121,18 @@
 <section id="privacy" class="section privacy">
   <h2>Privacy</h2>
   <p class="lede">
-    Heblish does not make a single network call. Ever. You can verify
-    it yourself.
+    Heblish makes no network calls — with one exception: when <em>you</em>
+    click "Check for Updates…" yourself. It never checks on its own, and never
+    sends your text anywhere. You can verify it.
   </p>
   <ul class="checklist">
-    <li>The compiled binary links only Apple frameworks (AppKit, Carbon, ApplicationServices). No <code>URLSession</code>, no <code>Network.framework</code>, nothing.</li>
+    <li>The autocorrect engine reads keystrokes entirely locally and links only Apple frameworks (AppKit, Carbon, ApplicationServices). Your typed text is never transmitted.</li>
+    <li>The <em>only</em> networked component is the update checker (the open-source Sparkle framework), and it runs <strong>solely</strong> when you choose "Check for Updates…" from the menu — automatic background checks are turned off.</li>
     <li>The dictionaries it uses are <code>/usr/share/dict/words</code> and macOS's bundled <code>NSSpellChecker</code> — both fully local.</li>
     <li>Your buffered word lives in RAM and is wiped whenever you finish a word, switch apps, lock the screen, or quit.</li>
     <li>Heblish never buffers when a password field, sudo prompt, or Touch ID dialog is active. macOS's <code>IsSecureEventInputEnabled()</code> short-circuits it.</li>
     <li>The only file Heblish writes is your ignore list, at <code>~/Library/Application Support/Heblish/ignore_list.txt</code>, with mode <code>0600</code>. You can read or delete it any time.</li>
-    <li>You can put Heblish behind any firewall (Little Snitch, LuLu, macOS's built-in) and block all outgoing traffic. It will work identically.</li>
+    <li>You can put Heblish behind any firewall (Little Snitch, LuLu, macOS's built-in) and block all outgoing traffic. Autocorrect works identically — you just won't be able to check for updates.</li>
   </ul>
 </section>
 
@@ -204,12 +206,14 @@
   </details>
 
   <details>
-    <summary>Does Heblish auto-update?</summary>
+    <summary>How does Heblish update?</summary>
     <p>
-      Yes — it uses Sparkle, the open-source auto-update framework. Updates
-      are signed with EdDSA and downloaded from this domain. You'll see a
-      gentle prompt when a new version is available; you can install it,
-      skip it, or disable update checks entirely in the menu.
+      On your terms. Heblish <strong>never checks for updates on its own</strong> —
+      there are no automatic background checks, so it stays completely
+      network-silent until you ask. When you want to, pick "Check for Updates…"
+      from the menu; it fetches a signed update feed (EdDSA-verified) and, if a
+      newer version exists, offers to install it. Updates download from GitHub
+      Releases. It uses Sparkle, the standard open-source update framework.
     </p>
   </details>
 
@@ -218,10 +222,10 @@
     <p>
       That is the right question to ask of any app that requests
       Accessibility permission. The short answer for Heblish: it's signed
-      and notarized by Apple, makes no network calls (verifiable with
-      <code>nm</code> on the binary), and the source code can be reviewed.
-      If you want a hard guarantee, block it at the firewall — it doesn't
-      need the network for anything.
+      and notarized by Apple, never transmits your text, and makes no network
+      call at all unless you manually check for updates. The source code can
+      be reviewed. If you want a hard guarantee, block it at the firewall —
+      autocorrect needs nothing from the network.
     </p>
   </details>
 
@@ -237,16 +241,17 @@
 <section id="changelog" class="section">
   <h2>Changelog</h2>
   <article class="release">
-    <h3>0.1 <span class="release-date">unreleased</span></h3>
+    <h3>1.0 <span class="release-date">June 24, 2026</span></h3>
     <ul>
-      <li>Initial release.</li>
+      <li>Initial public release.</li>
       <li>Auto-correct of layout-mistyped Hebrew and English words on word-boundary.</li>
       <li>Manual fix, undo, and ignore-selection hotkeys (⌥⇧Z / ⌥⇧X / ⌥⇧I).</li>
       <li>Persistent ignore list with full edit and clear controls.</li>
       <li>Mixed-script handling for shifted Latin literals on Hebrew layout.</li>
       <li>Proper-noun and acronym suppression.</li>
       <li>Asymmetric recent-context heuristics tuned against a 50-sentence corpus.</li>
-      <li>Auto-update via Sparkle, signed with EdDSA.</li>
+      <li>Signed and notarized by Apple; opens with no "unidentified developer" warning.</li>
+      <li>Manual update check via Sparkle (EdDSA-signed); no automatic background checks.</li>
     </ul>
   </article>
 </section>
