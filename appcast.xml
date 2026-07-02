@@ -4,7 +4,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Heblish — Updates</title>
-        <link>https://heblish.adialoni.com/appcast.xml</link>
+        <link>https://heblish.adialoni.ai/appcast.xml</link>
         <description>Stable releases of Heblish for macOS.</description>
         <language>en</language>
         <item>

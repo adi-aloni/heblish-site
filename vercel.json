@@ -28,5 +28,13 @@
             ]
         }
     ],
+    "redirects": [
+        {
+            "source": "/:path((?!appcast\\.xml).*)",
+            "has": [{ "type": "host", "value": "heblish.adialoni.com" }],
+            "destination": "https://heblish.adialoni.ai/:path",
+            "permanent": true
+        }
+    ],
     "cleanUrls": true
 }
