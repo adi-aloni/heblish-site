@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heblish — Hebrew/English layout autocorrect for macOS</title>
-<meta name="description" content="Stop retyping when you started in the wrong language. Heblish quietly catches the moment you mistyped Hebrew on English (or vice versa) and fixes it. macOS, local-only, no network calls.">
+<meta name="description" content="Stop retyping when you started in the wrong language. Heblish quietly catches the moment you mistyped Hebrew on English (or vice versa) and fixes it. macOS. Your typed text never leaves your Mac.">
 <meta name="theme-color" content="#1F8A63">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Heblish — Hebrew/English layout autocorrect for macOS">
-<meta property="og:description" content="Stop retyping when you started in the wrong language. macOS, local-only, no network calls.">
+<meta property="og:description" content="Stop retyping when you started in the wrong language. macOS. Your typed text never leaves your Mac.">
 <meta property="og:image" content="https://heblish.adialoni.ai/assets/og-image.png">
 <meta property="og:url" content="https://heblish.adialoni.ai/">
 <meta name="twitter:card" content="summary_large_image">
@@ -131,13 +131,16 @@
 <section id="privacy" class="section privacy">
   <h2>Privacy</h2>
   <p class="lede">
-    Heblish makes no network calls — with one exception: when <em>you</em>
-    click "Check for Updates…" yourself. It never checks on its own, and never
-    sends your text anywhere. You can verify it.
+    Heblish never sends your text anywhere — the autocorrect engine is entirely
+    local and makes no network calls. The one part that does use the network is
+    the update checker: it checks whether a newer Heblish exists, both on a
+    periodic background schedule and when you pick "Check for Updates…" yourself.
+    Either way it fetches only a signed version feed — nothing about you or what
+    you type. You can verify it, or block it at the firewall.
   </p>
   <ul class="checklist">
     <li>The autocorrect engine reads keystrokes entirely locally and links only Apple frameworks (AppKit, Carbon, ApplicationServices). Your typed text is never transmitted.</li>
-    <li>The <em>only</em> networked component is the update checker (the open-source Sparkle framework), and it runs <strong>solely</strong> when you choose "Check for Updates…" from the menu — automatic background checks are turned off.</li>
+    <li>The <em>only</em> networked component is the update checker (the open-source Sparkle framework). It checks for a newer version on a periodic background schedule and whenever you choose "Check for Updates…" from the menu — either way it fetches only the signed update feed and sends none of your text or any personal data.</li>
     <li>The dictionaries it uses are <code>/usr/share/dict/words</code> and macOS's bundled <code>NSSpellChecker</code> — both fully local.</li>
     <li>Your buffered word lives in RAM and is wiped whenever you finish a word, switch apps, lock the screen, or quit.</li>
     <li>Heblish never buffers when a password field, sudo prompt, or Touch ID dialog is active. macOS's <code>IsSecureEventInputEnabled()</code> short-circuits it.</li>
@@ -218,12 +221,14 @@
   <details>
     <summary>How does Heblish update?</summary>
     <p>
-      On your terms. Heblish <strong>never checks for updates on its own</strong> —
-      there are no automatic background checks, so it stays completely
-      network-silent until you ask. When you want to, pick "Check for Updates…"
-      from the menu; it fetches a signed update feed (EdDSA-verified) and, if a
-      newer version exists, offers to install it. Updates download from GitHub
-      Releases. It uses Sparkle, the standard open-source update framework.
+      Heblish checks for a newer version automatically in the background, and
+      also whenever you pick "Check for Updates…" from the menu. Either way it
+      fetches a signed update feed (EdDSA-verified) and, if a newer version
+      exists, <em>offers</em> to install it — nothing is downloaded or installed
+      without your say-so. The check fetches only the version feed; it never
+      sends your text. Updates download from GitHub Releases, and it uses
+      Sparkle, the standard open-source update framework. Prefer fully manual?
+      Block Heblish at the firewall and check whenever you like.
     </p>
   </details>
 
@@ -232,8 +237,8 @@
     <p>
       That is the right question to ask of any app that requests
       Accessibility permission. The short answer for Heblish: it's signed
-      and notarized by Apple, never transmits your text, and makes no network
-      call at all unless you manually check for updates. The source code can
+      and notarized by Apple, and it never transmits your text — its only
+      network activity is checking for its own updates. The source code can
       be reviewed. If you want a hard guarantee, block it at the firewall —
       autocorrect needs nothing from the network.
     </p>
@@ -273,7 +278,7 @@
       <li>Proper-noun and acronym suppression.</li>
       <li>Asymmetric recent-context heuristics tuned against a 50-sentence corpus.</li>
       <li>Signed and notarized by Apple; opens with no "unidentified developer" warning.</li>
-      <li>Manual update check via Sparkle (EdDSA-signed); no automatic background checks.</li>
+      <li>Automatic and manual update checks via Sparkle (EdDSA-signed).</li>
     </ul>
   </article>
 </section>
