@@ -8,14 +8,14 @@
         <description>Stable releases of Heblish for macOS.</description>
         <language>en</language>
         <item>
-            <title>Heblish 1.1</title>
-            <pubDate>Tue, 30 Jun 2026 09:20:34 -0700</pubDate>
-            <sparkle:version>110</sparkle:version>
-            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <title>Heblish 1.2</title>
+            <pubDate>Wed, 01 Jul 2026 21:14:19 -0700</pubDate>
+            <sparkle:version>120</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/adi-aloni/heblish-site/releases/download/v1.1/Heblish.dmg"
-                sparkle:edSignature="zbU2713qqIYhJTuZEtkJ/FguIe+rlpA6V1PsEeSGMaLUtJuQaaMj1YQlxAR0qXgfr0f7mLDOxm/THbZRhJS7Bg==" length="1588984"
+                url="https://github.com/adi-aloni/heblish-site/releases/download/v1.2/Heblish.dmg"
+                sparkle:edSignature="xI5vP6479ka9eP1Hb0WCgYSY9nlnPGLcyXBeeWf+tf1lrfTMeKBkqPm8qRcZs9Mm+TEBio3tuxRifs2gAAKgCA==" length="1589067"
                 type="application/octet-stream" />
         </item>
     </channel>
