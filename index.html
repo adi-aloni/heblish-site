@@ -46,6 +46,7 @@
     <a href="#privacy">Privacy</a>
     <a href="#faq">FAQ</a>
     <a href="#changelog">Changelog</a>
+    <a href="https://www.adialoni.ai/">About Adi Aloni</a>
   </nav>
 </header>
 
@@ -60,7 +61,7 @@
     source so your next word lands in the right layout.
   </p>
   <div class="cta">
-    <a class="btn primary" href="https://github.com/adi-aloni/heblish-site/releases/latest/download/Heblish.dmg">Download for macOS</a>
+    <a class="btn primary" id="download-btn" href="https://github.com/adi-aloni/heblish-site/releases/latest/download/Heblish.dmg" onclick="gtag('event', 'download', {'event_category': 'engagement', 'event_label': 'Heblish.dmg'});">Download for macOS</a>
     <span class="meta">Requires macOS 13 or later · Apple Silicon &amp; Intel · ~2&nbsp;MB</span>
   </div>
 
@@ -250,6 +251,18 @@
 <section id="changelog" class="section">
   <h2>Changelog</h2>
   <article class="release">
+    <h3>1.2 <span class="release-date">July 1, 2026</span></h3>
+    <ul>
+      <li>Fixed handling of the comma key on the Hebrew layout.</li>
+    </ul>
+  </article>
+  <article class="release">
+    <h3>1.1 <span class="release-date">June 30, 2026</span></h3>
+    <ul>
+      <li>Fixed issues with the geresh / apostrophe key.</li>
+    </ul>
+  </article>
+  <article class="release">
     <h3>1.0 <span class="release-date">June 24, 2026</span></h3>
     <ul>
       <li>Initial public release.</li>
@@ -269,7 +282,7 @@
 
 <footer>
   <div>
-    <a href="/">Heblish</a> · made by <a href="https://adialoni.ai">Adi Aloni</a> · <a href="mailto:adi@adialoni.ai">adi@adialoni.ai</a>
+    <a href="/">Heblish</a> · made by <a href="https://adialoni.ai">Adi Aloni</a> · <a href="https://www.linkedin.com/in/adialoni/" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:adi@adialoni.ai">adi@adialoni.ai</a>
   </div>
 </footer>
 
